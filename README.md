@@ -1,3 +1,5 @@
+###Status [![Build Status](https://travis-ci.org/tessus/MySQL-prefPane.svg?branch=master)](https://travis-ci.org/tessus/MySQL-prefPane)
+
 MySQL.prefPane
 ==============
 
