@@ -51,6 +51,7 @@
 	daemonController.startArguments  = arguments;
 
 	[versionText setTitle:version];
+	[versionText sizeToFit];
 
 	__weak typeof(theSlider) weakSlider = theSlider;
 	__weak typeof(pidtext) weakPidtext = pidtext;
@@ -96,6 +97,8 @@
 		[versionText setTitle:version];
 		numClicked = 0;
 	}
+
+	[versionText sizeToFit];
 }
 
 - (IBAction)openWebsite:(id)sender {
