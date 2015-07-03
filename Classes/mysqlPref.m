@@ -102,7 +102,7 @@
 }
 
 - (IBAction)openWebsite:(id)sender {
-	[[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: @"https://github.com/tessus/MySQL-prefPane"]];
+	[[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: @"http://tessus.github.io/MySQL-prefPane"]];
 }
 
 - (IBAction)startStopDaemon:(id)sender {
