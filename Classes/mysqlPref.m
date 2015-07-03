@@ -45,9 +45,17 @@
 	//NSLog(@"arguments (MySQL): %@", arguments);
 
 	NSString *lp = [[MSPPPreferences sharedPreferences] objectForUserDefaultsKey:@"launchPath"];
+	if ([lp hasSuffix:@"/"])
+	{
+		daemonController.launchPathStart = [lp stringByAppendingString:@"mysqld_safe"];
+		daemonController.launchPath      = [lp stringByAppendingString:@"mysqld"];
+	}
+	else
+	{
+		daemonController.launchPathStart = [lp stringByAppendingString:@"/mysqld_safe"];
+		daemonController.launchPath      = [lp stringByAppendingString:@"/mysqld"];
+	}
 
-	daemonController.launchPathStart = [lp stringByAppendingString:@"mysqld_safe"];
-	daemonController.launchPath      = [lp stringByAppendingString:@"mysqld"];
 	daemonController.startArguments  = arguments;
 
 	[versionText setTitle:version];
@@ -109,7 +117,14 @@
 	NSMutableArray *arguments = (NSMutableArray *)[[MSPPPreferences sharedPreferences] argumentsWithParameters];
 	
 	NSString *lp = [[MSPPPreferences sharedPreferences] objectForUserDefaultsKey:@"launchPath"];
-	daemonController.launchPath     = [lp stringByAppendingString:@"mysqld"];
+	if ([lp hasSuffix:@"/"])
+	{
+		daemonController.launchPath = [lp stringByAppendingString:@"mysqld"];
+	}
+	else
+	{
+		daemonController.launchPath = [lp stringByAppendingString:@"/mysqld"];
+	}
 	daemonController.startArguments = arguments;
 
 	if (theSlider.state == NSOffState)
@@ -125,7 +140,14 @@
 	NSMutableArray *arguments = (NSMutableArray *)[[MSPPPreferences sharedPreferences] argumentsWithParameters];
 
 	NSString *lp = [[MSPPPreferences sharedPreferences] objectForUserDefaultsKey:@"launchPath"];
-	daemonController.launchPath     = [lp stringByAppendingString:@"mysqld"];
+	if ([lp hasSuffix:@"/"])
+	{
+		daemonController.launchPath = [lp stringByAppendingString:@"mysqld"];
+	}
+	else
+	{
+		daemonController.launchPath = [lp stringByAppendingString:@"/mysqld"];
+	}
 	daemonController.startArguments = arguments;
 
 	int tag = (int)[sender tag];
