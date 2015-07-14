@@ -119,11 +119,13 @@
 	NSString *lp = [[MSPPPreferences sharedPreferences] objectForUserDefaultsKey:@"launchPath"];
 	if ([lp hasSuffix:@"/"])
 	{
-		daemonController.launchPath = [lp stringByAppendingString:@"mysqld"];
+		daemonController.launchPath      = [lp stringByAppendingString:@"mysqld"];
+		daemonController.launchPathStart = [lp stringByAppendingString:@"mysqld_safe"];
 	}
 	else
 	{
-		daemonController.launchPath = [lp stringByAppendingString:@"/mysqld"];
+		daemonController.launchPath      = [lp stringByAppendingString:@"/mysqld"];
+		daemonController.launchPathStart = [lp stringByAppendingString:@"/mysqld_safe"];
 	}
 	daemonController.startArguments = arguments;
 
@@ -142,11 +144,13 @@
 	NSString *lp = [[MSPPPreferences sharedPreferences] objectForUserDefaultsKey:@"launchPath"];
 	if ([lp hasSuffix:@"/"])
 	{
-		daemonController.launchPath = [lp stringByAppendingString:@"mysqld"];
+		daemonController.launchPath      = [lp stringByAppendingString:@"mysqld"];
+		daemonController.launchPathStart = [lp stringByAppendingString:@"mysqld_safe"];
 	}
 	else
 	{
-		daemonController.launchPath = [lp stringByAppendingString:@"/mysqld"];
+		daemonController.launchPath      = [lp stringByAppendingString:@"/mysqld"];
+		daemonController.launchPathStart = [lp stringByAppendingString:@"/mysqld_safe"];
 	}
 	daemonController.startArguments = arguments;
 
@@ -172,18 +176,38 @@
 	[openPanel setResolvesAliases:NO];
 	
 	if (![[launchPathTextField stringValue] isEqualToString:@""])
-		[openPanel setDirectoryURL:[NSURL fileURLWithPath:[[launchPathTextField stringValue] stringByDeletingLastPathComponent]]];
+		[openPanel setDirectoryURL:[NSURL fileURLWithPath:[launchPathTextField stringValue]]];
 	
 	if ([openPanel runModal] == NSOKButton) {
 		[launchPathTextField setStringValue:[openPanel.URL path]];
 		[[MSPPPreferences sharedPreferences] setObject:[launchPathTextField stringValue] forUserDefaultsKey:@"launchPath"];
-		daemonController.launchPath = [[MSPPPreferences sharedPreferences] objectForUserDefaultsKey:@"launchPath"];
+		NSString *lp = [[MSPPPreferences sharedPreferences] objectForUserDefaultsKey:@"launchPath"];
+		if ([lp hasSuffix:@"/"])
+		{
+			daemonController.launchPath      = [lp stringByAppendingString:@"mysqld"];
+			daemonController.launchPathStart = [lp stringByAppendingString:@"mysqld_safe"];
+		}
+		else
+		{
+			daemonController.launchPath      = [lp stringByAppendingString:@"/mysqld"];
+			daemonController.launchPathStart = [lp stringByAppendingString:@"/mysqld_safe"];
+		}
 	}
 }
 
 - (void)binaryLocationChanged:(NSNotification *)notification {
 	[[MSPPPreferences sharedPreferences] setObject:[launchPathTextField stringValue] forUserDefaultsKey:@"launchPath"];
-	daemonController.launchPath = [[MSPPPreferences sharedPreferences] objectForUserDefaultsKey:@"launchPath"];
+	NSString *lp = [[MSPPPreferences sharedPreferences] objectForUserDefaultsKey:@"launchPath"];
+	if ([lp hasSuffix:@"/"])
+	{
+		daemonController.launchPath      = [lp stringByAppendingString:@"mysqld"];
+		daemonController.launchPathStart = [lp stringByAppendingString:@"mysqld_safe"];
+	}
+	else
+	{
+		daemonController.launchPath      = [lp stringByAppendingString:@"/mysqld"];
+		daemonController.launchPathStart = [lp stringByAppendingString:@"/mysqld_safe"];
+	}
 }
 
 @end
