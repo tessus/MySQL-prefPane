@@ -86,7 +86,6 @@ static MSPPPreferences *sharedPreferences = nil;
 				
 				if([fileManager fileExistsAtPath:@"/usr/local/mysql/bin/mysqld"])
 					location = @"/usr/local/mysql/bin/";
-				/*
 				else if ([fileManager fileExistsAtPath:@"/usr/bin/mysqld"])
 					location = @"/usr/bin/";
 				else if ([fileManager fileExistsAtPath:@"/bin/mysqld"])
@@ -97,7 +96,6 @@ static MSPPPreferences *sharedPreferences = nil;
 					location = @"/opt/bin/";
 				else if ([fileManager fileExistsAtPath:@"/opt/local/bin/mysqld"])
 					location = @"/opt/local/bin/";
-				 */
 				
 				[self setObject:location forUserDefaultsKey:@"launchPath"];
 			}
