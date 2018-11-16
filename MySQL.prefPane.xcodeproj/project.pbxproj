@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -257,7 +257,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Helmut K. C. Tessarek";
 				TargetAttributes = {
 					0EB5C3641B252FB100FB9A19 = {
@@ -266,7 +266,7 @@
 				};
 			};
 			buildConfigurationList = 1DBD214C08BA80EA00186707 /* Build configuration list for PBXProject "MySQL.prefPane" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -321,7 +321,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "GIT=/usr/bin/git\nSEP=\"_\"\nINFOPLIST=Classes/InfoPlist.h\n\n# CFBundleShortVersionString\tx.y[.z]\n# CFBundleVersion\t\t\t\tx.y.z-githash\n\ngithash=`$GIT log -1 --pretty=oneline --abbrev-commit |cut -c1-7`\nrevision=`$GIT log --oneline | wc -l |tr -d [[:space:]]`\n\n# if no tag, set x.y to 0.0\nif [ `$GIT describe --long 2>&1 |cut -c1-5` == \"fatal\" ]\nthen\nversion=0.0\ninternal_version=0.0.0${SEP}$githash\n\nelse\n\n# get tag and long tag name (w/o the githash)\nTAG=`$GIT describe --tags`\nTAGLONG=`$GIT describe --tags --long |sed \"s/-g${githash}//\"`\n\n# remove leading characters\nTAG=`echo $TAG |sed 's/[a-zA-Z]*//'`\nTAGLONG=`echo $TAGLONG |sed 's/[a-zA-Z]*//'`\n\n# get the number of commits since last tag\nTMP1=`expr \"$TAGLONG\" : '.*\\(-[0-9]*\\)'`\n\nif [ \"$TMP1\" == \"0\" ]\nthen\ncommits=0\nelse\ncommits=`echo $TMP1 |cut -c2-`\nfi\n\n# clean tag: remove anything after the version, replace consecutive . with one ., remove trailing .\nTAG=`echo $TAG | sed 's/\\([0-9\\.]*\\).*/\\1/' | sed 's/[\\.]\\{2,\\}/\\./g' | sed 's/\\.*$//'`\n\n# create version and internal_version\nversion=$TAG\n\nif [ \"$commits\" != \"0\" ] # if no commits since tagged, omit the zero in version\nthen\nversion=${TAG}.${commits}\nfi\n\ninternal_version=${TAG}.${commits}${SEP}${githash}\n\nfi\n\necho \"#define VERSION_INFO $version\" > $INFOPLIST\necho \"#define INTERNAL_VERSION_INFO $internal_version\" >> $INFOPLIST\necho \"#define GIT_HASH_INFO $githash\" >> $INFOPLIST\necho \"#define REVISION_INFO $revision\" >> $INFOPLIST\necho \"\" >> $INFOPLIST\necho \"#define VERSION \\\"$version\\\"\" >> $INFOPLIST\necho \"#define INTERNAL_VERSION \\\"$internal_version\\\"\" >> $INFOPLIST\necho \"#define GIT_HASH \\\"$githash\\\"\" >> $INFOPLIST\necho \"#define REVISION \\\"$revision\\\"\" >> $INFOPLIST\n";
+			shellScript = "GIT=/usr/bin/git\nSEP=\"_\"\nINFOPLIST=Classes/InfoPlist.h\n\n# CFBundleShortVersionString    x.y[.z]\n# CFBundleVersion                x.y.z-githash\n\ngithash=`$GIT log -1 --pretty=oneline --abbrev-commit |cut -c1-7`\nrevision=`$GIT log --oneline | wc -l |tr -d [[:space:]]`\n\n# if no tag, set x.y to 0.0\nif [ `$GIT describe --long 2>&1 |cut -c1-5` == \"fatal\" ]\nthen\nversion=0.0\ninternal_version=0.0.0${SEP}$githash\n\nelse\n\n# get tag and long tag name (w/o the githash)\nTAG=`$GIT describe --tags`\nTAGLONG=`$GIT describe --tags --long |sed \"s/-g${githash}//\"`\n\n# remove leading characters\nTAG=`echo $TAG |sed 's/[a-zA-Z]*//'`\nTAGLONG=`echo $TAGLONG |sed 's/[a-zA-Z]*//'`\n\n# get the number of commits since last tag\nTMP1=`expr \"$TAGLONG\" : '.*\\(-[0-9]*\\)'`\n\nif [ \"$TMP1\" == \"0\" ]\nthen\ncommits=0\nelse\ncommits=`echo $TMP1 |cut -c2-`\nfi\n\n# clean tag: remove anything after the version, replace consecutive . with one ., remove trailing .\nTAG=`echo $TAG | sed 's/\\([0-9\\.]*\\).*/\\1/' | sed 's/[\\.]\\{2,\\}/\\./g' | sed 's/\\.*$//'`\n\n# create version and internal_version\nversion=$TAG\n\nif [ \"$commits\" != \"0\" ] # if no commits since tagged, omit the zero in version\nthen\nversion=${TAG}.${commits}\nfi\n\ninternal_version=${TAG}.${commits}${SEP}${githash}\n\nfi\n\necho \"#define VERSION_INFO $version\" > $INFOPLIST\necho \"#define INTERNAL_VERSION_INFO $internal_version\" >> $INFOPLIST\necho \"#define GIT_HASH_INFO $githash\" >> $INFOPLIST\necho \"#define REVISION_INFO $revision\" >> $INFOPLIST\necho \"\" >> $INFOPLIST\necho \"#define VERSION \\\"$version\\\"\" >> $INFOPLIST\necho \"#define INTERNAL_VERSION \\\"$internal_version\\\"\" >> $INFOPLIST\necho \"#define GIT_HASH \\\"$githash\\\"\" >> $INFOPLIST\necho \"#define REVISION \\\"$revision\\\"\" >> $INFOPLIST\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -364,6 +364,8 @@
 		0EB5C3661B252FB200FB9A19 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "cx.evermeet.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -371,6 +373,8 @@
 		0EB5C3671B252FB200FB9A19 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "cx.evermeet.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -378,7 +382,7 @@
 		1DBD214908BA80EA00186707 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -387,13 +391,13 @@
 					"\"$(SRCROOT)/Lib\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Classes/MySQL-Prefix.pch";
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "cx.evermeet.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = MySQL;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
@@ -405,7 +409,7 @@
 		1DBD214A08BA80EA00186707 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -418,6 +422,7 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "cx.evermeet.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = MySQL;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
@@ -428,17 +433,39 @@
 		1DBD214D08BA80EA00186707 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Classes/InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = NO;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 			};
@@ -447,16 +474,37 @@
 		1DBD214E08BA80EA00186707 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_PREFIX_HEADER = Classes/InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PREBINDING = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 			};

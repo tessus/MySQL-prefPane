@@ -50,6 +50,7 @@
 
 
 #import "MBSliderButton.h"
+#import "mysqlPref.h"
 
 @implementation MSPPMBSliderButton
 
